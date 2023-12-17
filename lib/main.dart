@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_estados/pages/pagina1_page.dart';
 import 'package:project_estados/pages/pagina2_page.dart';
+import 'package:project_estados/services/usuario_service.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,14 +14,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Material App',
-      initialRoute: 'pagina1',
-      routes: {
-        'pagina1': (_) => Pagina1Page(),
-        'pagina2': (_) => Pagina2Page(),
-      },
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => UsuarioService())],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Material App',
+        initialRoute: 'pagina1',
+        routes: {
+          'pagina1': (_) => Pagina1Page(),
+          'pagina2': (_) => Pagina2Page(),
+        },
+      ),
     );
   }
 }
